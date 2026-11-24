@@ -27,6 +27,14 @@ jobs:
           select-by-folder: tests
           test-results-junit: test-results/results.xml
 
+      - name: Publish test report
+        if: always()
+        uses: dorny/test-reporter@v3
+        with:
+          name: MATLAB tests
+          path: test-results/junit.xml
+          reporter: java-junit
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v7
